@@ -26,8 +26,13 @@ import Footer from '../components/Footer.astro';
   import { initContact } from '../scripts/contact-animation';
   import { initFooter } from '../scripts/footer-animation';
 
-  // Esperamos a que carguen las fuentes para evitar saltos en SplitText
-  document.fonts.ready.then(() => {
+  // Wait for fonts so SplitText measures correctly, but never block forever:
+  // some Samsung Internet versions can leave document.fonts.ready unresolved,
+  // which would otherwise prevent ALL animations from ever initializing.
+  const fontsReady = document.fonts?.ready ?? Promise.resolve();
+  const timeout = new Promise((resolve) => setTimeout(resolve, 1500));
+
+  Promise.race([fontsReady, timeout]).then(() => {
     initLenis();
     initHero();
     initManifesto();

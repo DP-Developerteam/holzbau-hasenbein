@@ -47,6 +47,13 @@ function initMarquee(footer: HTMLElement) {
 
     // El track contiene dos copias idénticas del contenido: -50% = un bucle exacto
     const loopWidth = track.scrollWidth / 2;
+
+    // Layout puede no estar asentado aún (viewport móvil / fuentes) -> reintenta.
+    if (!loopWidth) {
+      requestAnimationFrame(setup);
+      return;
+    }
+
     const pxPerSecond = 60;
 
     tween = gsap.to(track, {
@@ -59,6 +66,7 @@ function initMarquee(footer: HTMLElement) {
 
   setup();
   window.addEventListener('resize', setup);
+  ScrollTrigger.addEventListener('refresh', setup);
 }
 
 // Pequeño "tirón" magnético hacia el cursor en los textos grandes y el botón

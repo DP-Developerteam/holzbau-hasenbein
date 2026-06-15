@@ -42,5 +42,29 @@ export function initLenis() {
     // puedan usar lenis.scrollTo() sin recrear la instancia.
     (window as unknown as { __lenis: Lenis }).__lenis = lenis;
 
+    // --- Mobile viewport fix ---------------------------------------------
+    // Safari iOS / Samsung Internet resize the visual viewport (collapsing
+    // address bar) shortly after load and while scrolling. ScrollTrigger
+    // computes pin/scrub start & end positions in pixels at setup time, so
+    // if that happens before the browser UI settles, the ranges can end up
+    // wrong (collapsed, or unreachable) -> animations freeze or fire all at
+    // once. Re-running ScrollTrigger.refresh() once things settle fixes this
+    // without affecting browsers that already worked correctly.
+    const refreshSoon = () => {
+        requestAnimationFrame(() => requestAnimationFrame(() => ScrollTrigger.refresh()));
+    };
+
+    window.addEventListener('load', () => setTimeout(refreshSoon, 300));
+
+    let resizeTimer: number;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(refreshSoon, 200);
+    });
+
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', refreshSoon);
+    }
+
     return lenis;
 }
