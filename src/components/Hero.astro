@@ -1,0 +1,266 @@
+---
+---
+
+<section id="hero" class="hero">
+  <!-- Capa 1: Video de fondo a pantalla completa -->
+  <video class="hero-video" autoplay muted loop playsinline preload="auto">
+    <source src="/videos/intro-video.webm" type="video/webm" />
+  </video>
+
+  <!-- Capa 1.5: Velo para mejorar la legibilidad del texto sobre el vídeo -->
+  <div class="hero-scrim" aria-hidden="true"></div>
+
+  <!-- Capa 2: SVG con la máscara de texto calado.
+       El viewBox se ajusta por JS al tamaño real en píxeles del hero, de modo
+       que 1 unidad = 1px y NUNCA se recorta el espacio del texto. Las rect usan
+       100%/100% para cubrir siempre el viewBox completo sin recalcularlas. -->
+  <svg
+    class="hero-cutout"
+    preserveAspectRatio="xMidYMid slice"
+    aria-hidden="true"
+  >
+    <defs>
+      <mask id="meister-cutout-mask">
+        <rect width="100%" height="100%" fill="white" />
+        <text
+          class="cutout-text"
+          text-anchor="middle"
+          dominant-baseline="central"
+          fill="black"
+        ><tspan class="cutout-line" dy="-0.55em">ZIMMERMANN</tspan><tspan class="cutout-line" dy="0.75em">MEISTER</tspan></text>
+      </mask>
+    </defs>
+    <rect
+      width="100%"
+      height="100%"
+      fill="#0B0B0C"
+      mask="url(#meister-cutout-mask)"
+    />
+  </svg>
+
+  <!-- Capa 3: Texto final revelado al completar la animación -->
+  <div class="hero-final-text">
+    <p class="hero-eyebrow">Zimmermann · Köln · Seit 2012</p>
+    <h1 class="hero-name">Ilyas Hasenbein</h1>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline">Holzkonstruktionen —<br/>Dach, Fassade und Innenausbau —<br/>in Köln von Hand gefügt —</p>
+  </div>
+
+  <!-- Indicador de scroll -->
+  <div class="scroll-hint">
+    <span>Scrollen</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--color-meister-bg);
+  }
+
+  /* Video: forzado a cubrir toda la pantalla sin deformarse */
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    z-index: 1;
+  }
+
+  /*
+   * Velo de contraste sobre el vídeo. El texto del hero es claro (bone/gold),
+   * así que un oscurecido sutil es lo que mejora su legibilidad.
+   * - Una capa uniforme tenue baja el brillo general del vídeo.
+   * - Un degradado refuerza la zona central/inferior, donde vive el texto.
+   *
+   * ¿Prefieres un velo BLANQUECINO (look más aireado)? Sustituye el `background`
+   * por: rgba(244, 244, 243, 0.22); y añade a `.hero-name`/`.hero-tagline`
+   * un text-shadow oscuro para mantener el contraste. Ver nota más abajo.
+   */
+  .hero-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    /* background:
+      radial-gradient(
+        120% 90% at 50% 60%,
+        rgba(11, 11, 12, 0) 0%,
+        rgba(11, 11, 12, 0.28) 70%,
+        rgba(11, 11, 12, 0.5) 100%
+      ),
+      linear-gradient(
+        to bottom,
+        rgba(11, 11, 12, 0.15) 0%,
+        rgba(11, 11, 12, 0.1) 45%,
+        rgba(11, 11, 12, 0.4) 100%
+      ); */
+    background: rgba(246, 246, 246, 0.08);
+  }
+
+  /* SVG ocupa todo el viewport por encima del video */
+  .hero-cutout {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    will-change: opacity;
+  }
+
+  /* OJO: NO definimos font-size aquí. El tamaño se fija como atributo SVG
+     desde el script (responsive y, además, animable por GSAP sin que el CSS
+     lo sobrescriba). */
+  .cutout-text {
+    font-family: var(--font-display);
+    font-weight: 800;
+    will-change: font-size, letter-spacing;
+  }
+
+  /* Texto final, oculto inicialmente */
+  .hero-final-text {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    will-change: opacity, transform;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--color-meister-bg);
+    margin: 0 0 1.5rem;
+    background: var(--color-meister-bone);
+    padding: 0.05rem 0.25rem;
+  }
+
+  .hero-name {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(2.5rem, 7vw, 6rem);
+    line-height: 1;
+    margin: 0;
+    color: var(--color-meister-bone);
+  }
+
+  .hero-divider {
+    width: 1px;
+    height: 48px;
+    background: var(--color-meister-gold);
+    margin: 2rem 0;
+  }
+
+  .hero-tagline {
+    font-family: var(--font-body);
+    font-size: clamp(0.875rem, 1.4vw, 1.125rem);
+    font-weight: 300;
+    color: var(--color-meister-bone);
+    max-width: 32rem;
+    margin: 0;
+    opacity: 0.85;
+  }
+
+  /* Scroll hint */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--color-meister-bone);
+    opacity: 0.6;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: var(--color-meister-bone);
+    animation: scrollPulse 2.4s ease-in-out infinite;
+    transform-origin: top;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { transform: scaleY(0.3); opacity: 0.3; }
+    50% { transform: scaleY(1); opacity: 1; }
+  }
+</style>
+
+<script>
+  // Ajuste responsive del texto calado.
+  // Hacemos que el viewBox del SVG coincida con el tamaño en píxeles del hero
+  // (1 unidad = 1px => sin recortes) y calculamos el font-size para que la
+  // palabra más larga ("HOLZMEISTER") quepa siempre, con margen.
+  function sizeHeroCutout() {
+    const hero = document.querySelector<HTMLElement>('#hero');
+    const svg = document.querySelector<SVGSVGElement>('.hero-cutout');
+    const text = document.querySelector<SVGTextElement>('.cutout-text');
+    const lines = document.querySelectorAll<SVGTSpanElement>('.cutout-line');
+    if (!hero || !svg || !text || !lines.length) return;
+
+    const w = hero.clientWidth;
+    const h = hero.clientHeight;
+    if (!w || !h) return;
+
+    // viewBox = píxeles reales => el ancho visible es exactamente `w`
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+
+    // Centrado del bloque de texto
+    const cx = w / 2;
+    const cy = h / 2;
+    text.setAttribute('x', String(cx));
+    text.setAttribute('y', String(cy));
+    lines.forEach((line) => line.setAttribute('x', String(cx)));
+
+    // Letras más largas: "HOLZMEISTER" = 11 caracteres.
+    const longest = 11;
+    // Factor de avance medio por carácter para la fuente display (ExtraBold).
+    const advance = 0.66;
+    // Usamos solo el 86% del ancho para dejar aire en los laterales.
+    const widthFit = (w * 0.86) / (longest * advance);
+    // Dos líneas (~2.4em de alto): que no superen el 80% de la altura.
+    const heightFit = (h * 0.8) / 2.4;
+    // Tope superior para pantallas muy anchas.
+    const cap = 280;
+
+    const fontSize = Math.max(24, Math.min(widthFit, heightFit, cap));
+
+    text.setAttribute('font-size', String(fontSize));
+    // Tracking sutil, proporcional al tamaño.
+    text.style.letterSpacing = `${(-0.02 * fontSize).toFixed(2)}px`;
+  }
+
+  sizeHeroCutout();
+  window.addEventListener('resize', sizeHeroCutout);
+  // Reajuste tras cargar las fuentes (cambian las métricas reales del texto)
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(sizeHeroCutout);
+  }
+</script>

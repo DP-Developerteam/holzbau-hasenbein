@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+// import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Impressum | Ilyas Hasenbein">
+  <main class="legal">
+    <a href="/" class="legal-back">← Zurück</a>
+    <h1>Impressum</h1>
+
+    <h2>Angaben gemäß § 5 TMG</h2>
+    <p>
+      Ilyas Hasenbein<br/>
+      Holzmeister<br/>
+      Musterstraße 12<br/>
+      50672 Köln<br/>
+      Deutschland
+    </p>
+
+    <h2>Kontakt</h2>
+    <p>
+      Telefon: +49 221 000 0000<br/>
+      E-Mail: ilyas@hasenbein-koeln.de
+    </p>
+
+    <h2>Berufsbezeichnung</h2>
+    <p>
+      Holzmeister (verliehen in der Bundesrepublik Deutschland)<br/>
+      Zuständige Kammer: Handwerkskammer zu Köln
+    </p>
+
+    <h2>Umsatzsteuer-ID</h2>
+    <p>USt-IdNr.: DE000000000</p>
+
+    <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+    <p>Ilyas Hasenbein, Anschrift wie oben.</p>
+  </main>
+  <!-- <Footer /> -->
+</BaseLayout>
+
+<style>
+  .legal {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 8rem 2rem 4rem;
+    color: var(--color-meister-bone);
+  }
+
+  .legal-back {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-meister-gold);
+    text-decoration: none;
+    margin-bottom: 4rem;
+  }
+
+  .legal h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: -0.02em;
+    margin: 0 0 3rem;
+  }
+
+  .legal h2 {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.4rem;
+    margin: 2.5rem 0 0.75rem;
+    color: var(--color-meister-gold);
+  }
+
+  .legal p {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    opacity: 0.85;
+    margin: 0;
+  }
+</style>

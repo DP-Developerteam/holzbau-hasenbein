@@ -1,0 +1,326 @@
+---
+---
+
+<footer id="footer" class="footer">
+  <div class="footer-inner">
+    <p class="footer-label" data-reveal>— Lust auf ein Projekt?</p>
+    <h2 class="footer-heading" data-reveal>Lass uns<br />bauen.</h2>
+
+    <div class="footer-contacts">
+      <a href="mailto:ilyas@holzbau-hasenbein.de" class="footer-contact" data-reveal>
+        <span class="footer-contact-label">E-Mail</span>
+        <span class="footer-contact-value" data-magnetic>
+          ilyas@holzbau-hasenbein.de
+          <span class="footer-contact-arrow" aria-hidden="true">↗</span>
+        </span>
+      </a>
+      <a href="tel:+4917631546409" class="footer-contact" data-reveal>
+        <span class="footer-contact-label">Telefon</span>
+        <span class="footer-contact-value" data-magnetic>
+          +49 176 315 464 09
+          <span class="footer-contact-arrow" aria-hidden="true">↗</span>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Cinta de marca en bucle infinito -->
+  <div class="footer-marquee" aria-hidden="true">
+    <div class="footer-marquee-track" data-marquee>
+      <span class="footer-marquee-item">
+        Dachdecker <span class="footer-marquee-dot">│</span> Zimmerer <span class="footer-marquee-dot">│</span> Bauklempner <span class="footer-marquee-dot">│</span> Köln <span class="footer-marquee-dot">│</span>
+      </span>
+      <span class="footer-marquee-item">
+        Dachdecker <span class="footer-marquee-dot">│</span> Zimmerer <span class="footer-marquee-dot">│</span> Bauklempner <span class="footer-marquee-dot">│</span> Köln <span class="footer-marquee-dot">│</span>
+      </span>
+      <span class="footer-marquee-item">
+        Dachdecker <span class="footer-marquee-dot">│</span> Zimmerer <span class="footer-marquee-dot">│</span> Bauklempner <span class="footer-marquee-dot">│</span> Köln <span class="footer-marquee-dot">│</span>
+      </span>
+      <span class="footer-marquee-item">
+        Dachdecker <span class="footer-marquee-dot">│</span> Zimmerer <span class="footer-marquee-dot">│</span> Bauklempner <span class="footer-marquee-dot">│</span> Köln <span class="footer-marquee-dot">│</span>
+      </span>
+    </div>
+  </div>
+
+  <div class="footer-bottom justify-between">
+    <div class="footer-bottom-group" data-reveal>
+      <span class="footer-brand">Ilyas Hasenbein</span>
+      <span class="footer-address">Atelier · Dunnwald · Köln</span>
+    </div>
+
+    <nav class="footer-nav" aria-label="Abschnitte" data-reveal>
+      <a href="#services">Leistungen</a>
+      <a href="#werke">Arbeiten</a>
+      <a href="#manifesto">Philosophie</a>
+      <a href="#contact">Kontakt</a>
+    </nav>
+
+    <div class="footer-legal" data-reveal>
+      <div class="footer-legal-links">
+        <a href="/impressum">Impressum</a>
+        <a href="/datenschutz">Datenschutz</a>
+      </div>
+      <p class="footer-copyright">© 2026 Holzbau Hasenbein. Alle Rechte vorbehalten.</p>
+    </div>
+
+    <button class="footer-top" type="button" data-scroll-top data-magnetic aria-label="Nach oben scrollen">
+      <span aria-hidden="true">↑</span>
+    </button>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    position: relative;
+    background: var(--color-meister-bone);
+    color: var(--color-meister-bg);
+    overflow: hidden;
+  }
+
+  /* ---------- Bloque principal: titular + contactos gigantes ---------- */
+
+  .footer-inner {
+    padding: clamp(4rem, 10vw, 8rem) 2rem clamp(3rem, 7vw, 5rem);
+    max-width: 72rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .footer-label {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--color-meister-bg);
+    opacity: 0.5;
+    margin: 0 0 1.5rem;
+  }
+
+  .footer-heading {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(3rem, 11vw, 9rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin: 0 0 clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .footer-contacts {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-contact {
+    display: block;
+    text-decoration: none;
+    color: var(--color-meister-bg);
+    padding: clamp(1rem, 2.5vw, 1.75rem) 0;
+    border-top: 1px solid color-mix(in srgb, var(--color-meister-bg) 14%, transparent);
+  }
+
+  .footer-contacts .footer-contact:last-child {
+    border-bottom: 1px solid color-mix(in srgb, var(--color-meister-bg) 14%, transparent);
+  }
+
+  .footer-contact-label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    opacity: 0.4;
+    margin-bottom: 0.85rem;
+  }
+
+  .footer-contact-value {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.5rem, 1.5vw, 1.25rem);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.4rem, 6.5vw, 4.5rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    word-break: break-word;
+    transition: opacity 0.35s ease;
+  }
+
+  .footer-contact-value::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.08em;
+    height: 2px;
+    background: var(--color-meister-gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.22, 0.8, 0.2, 1);
+  }
+
+  .footer-contact-arrow {
+    display: inline-block;
+    font-size: 0.45em;
+    transition: transform 0.45s cubic-bezier(0.22, 0.8, 0.2, 1);
+  }
+
+  .footer-contact:hover .footer-contact-value::after,
+  .footer-contact:focus-visible .footer-contact-value::after {
+    transform: scaleX(1);
+  }
+
+  .footer-contact:hover .footer-contact-arrow,
+  .footer-contact:focus-visible .footer-contact-arrow {
+    transform: translate(0.2em, -0.2em);
+  }
+
+  /* "Spotlight": al pasar el cursor por un contacto, el otro se atenúa */
+  .footer-contacts:hover .footer-contact-value {
+    opacity: 0.3;
+  }
+
+  .footer-contacts .footer-contact:hover .footer-contact-value,
+  .footer-contacts .footer-contact:focus-visible .footer-contact-value {
+    opacity: 1;
+  }
+
+  /* ---------- Cinta de marca en bucle ---------- */
+
+  .footer-marquee {
+    background: var(--color-meister-bg);
+    color: var(--color-meister-bone);
+    overflow: hidden;
+    padding: clamp(0.9rem, 2vw, 1.5rem) 0;
+    border-top: 1px solid var(--color-meister-gold);
+    border-bottom: 1px solid var(--color-meister-gold);
+  }
+
+  .footer-marquee-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+
+  .footer-marquee-item {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.1rem, 3.2vw, 2.25rem);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding-right: 0.6em;
+  }
+
+  .footer-marquee-dot {
+    color: var(--color-meister-bone);
+    margin: 0 0.7em;
+  }
+
+  /* ---------- Fila inferior ---------- */
+
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem 3rem;
+    align-items: flex-start;
+    padding: clamp(2.5rem, 6vw, 4rem) 2rem;
+    max-width: 72rem;
+    margin: 0 auto;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+  }
+
+  .footer-bottom-group {
+    flex: 1 1 14rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer-brand {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .footer-address {
+    opacity: 0.55;
+    line-height: 1.7;
+  }
+
+  .footer-nav,
+  .footer-legal-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .footer-nav {
+    flex: 0 1 10rem;
+  }
+
+  .footer-legal {
+    flex: 1 1 14rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .footer-nav a,
+  .footer-legal-links a {
+    width: fit-content;
+    color: var(--color-meister-bg);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.3em;
+    opacity: 0.6;
+    transition: opacity 0.25s ease, text-decoration-color 0.25s ease;
+  }
+
+  .footer-nav a:hover,
+  .footer-legal-links a:hover,
+  .footer-nav a:focus-visible,
+  .footer-legal-links a:focus-visible {
+    opacity: 1;
+    text-decoration-color: var(--color-meister-gold);
+  }
+
+  .footer-copyright {
+    margin: 0;
+    opacity: 0.45;
+  }
+
+  .footer-top {
+    flex: 0 0 auto;
+    align-self: flex-start;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+    border: 1px solid var(--color-meister-bg);
+    background: transparent;
+    color: var(--color-meister-bg);
+    font-size: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: auto;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  }
+
+  .footer-top:hover {
+    background: var(--color-meister-bg);
+    color: var(--color-meister-bone);
+  }
+
+  @media (max-width: 640px) {
+    .footer-top {
+      margin-left: 0;
+    }
+  }
+</style>

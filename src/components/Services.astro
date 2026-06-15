@@ -1,0 +1,275 @@
+---
+const services = [
+  {
+    num: '01',
+    title: 'Steildach & Eindeckung',
+    sub: 'Pitched Roof & Tiling',
+    desc: 'Umfassende Sanierung, Neueindeckung und Reparatur von Steildächern inklusive GEG-konformer Wärmedämmung, Dachflächenfenstern und Photovoltaik-Integration.'
+  },
+  {
+    num: '02',
+    title: 'Flachdach & Abdichtung',
+    sub: 'Flat Roof & Waterproofing',
+    desc: 'Langlebige Flachdachabdichtungen mit modernen Bitumenbahnen und Flüssigkunststoff, inklusive Gründach-Konzepten und dem fachgerechten Einbau von Oberlichtern.'
+  },
+  {
+    num: '03',
+    title: 'Zimmerei & Holzbau',
+    sub: 'Carpentry & Timber Construction',
+    desc: 'Präzise gefertigte Dachstühle, Dachaufstockungen, Carports, Gauben sowie maßgeschneiderte Außenanlagen wie Terrassen, Überdachungen und moderne Tiny Houses.'
+  },
+  {
+    num: '04',
+    title: 'Bauklempnerei & Spenglerei',
+    sub: 'Roof Plumbing & Metalwork',
+    desc: 'Professionelle Dachentwässerung, passgenaue Regenrinnen und Fallrohre sowie hochwertige Fassaden- und Dachbekleidungen aus Metall samt Kaminabdeckungen.'
+  },
+  {
+    num: '05',
+    title: 'Innenausbau & Sanierung',
+    sub: 'Interior Woodwork & Renovation',
+    desc: 'Individuelle Einbauten, Treppenbau und Wandverkleidungen aus hochwertigem Massivholz für ein gesundes, atmendes Raumklima im gesamten Gebäude.'
+  }
+];
+
+const servicesLength = services.length;
+---
+
+<section id="services" class="services max-w-7xl mx-auto">
+  <div class="services-pin" data-services-pin>
+    <div class="services-header">
+      <span class="services-label">— Leistungen</span>
+      <h2 class="services-title">Fünf Disziplinen,<br />eine Hand.</h2>
+
+      <div class="services-progress" aria-hidden="true">
+        <span class="services-progress-track">
+          <span class="services-progress-bar" data-progress-bar></span>
+        </span>
+        <span class="services-progress-count">
+          <span data-progress-current>01</span> / 0{servicesLength}
+        </span>
+      </div>
+    </div>
+
+    <div class="services-track-wrapper" data-track-wrapper>
+      <div class="services-track" data-track>
+        {services.map((s) => (
+          <article class="service-card" data-service>
+            <span class="service-marker" aria-hidden="true"></span>
+            <span class="service-num">{s.num}</span>
+            <div class="service-content">
+              <h3 class="service-title" data-parallax>{s.title}</h3>
+              <p class="service-sub">{s.sub}</p>
+              <p class="service-desc">{s.desc}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    position: relative;
+    background: var(--color-meister-bg);
+  }
+
+  .services-pin {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 5rem 0;
+  }
+
+  .services-header {
+    max-width: 80rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+    flex-shrink: 0;
+  }
+
+  .services-label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--color-meister-gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .services-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin: 0;
+    color: var(--color-meister-bone);
+  }
+
+  /* Indicador de progreso del scroll horizontal */
+  .services-progress {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .services-progress-track {
+    position: relative;
+    flex: 1 1 auto;
+    max-width: 16rem;
+    height: 2px;
+    background: var(--color-meister-line);
+    overflow: hidden;
+  }
+
+  .services-progress-bar {
+    position: absolute;
+    inset: 0;
+    background: var(--color-meister-gold);
+    transform-origin: left center;
+    transform: scaleX(0);
+    will-change: transform;
+  }
+
+  .services-progress-count {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: var(--color-meister-bone);
+    opacity: 0.55;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Carril horizontal */
+  .services-track-wrapper {
+    position: relative;
+    flex: 1 1 auto;
+    margin-top: 3rem;
+    overflow: hidden;
+  }
+
+  .services-track {
+    display: flex;
+    align-items: stretch;
+    height: 100%;
+    width: max-content;
+    padding-left: 2rem;
+    will-change: transform;
+  }
+
+  .services-track::after {
+    content: '';
+    flex: 0 0 2rem;
+  }
+
+  .service-card {
+    position: relative;
+    flex-shrink: 0;
+    width: clamp(40rem, 32vw, 36rem);
+    height: 100%;
+    max-height: 350px;
+    padding: 3rem 3.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-left: 1px solid var(--color-meister-line);
+  }
+
+  .service-marker {
+    position: absolute;
+    top: 1.75rem;
+    right: 1.75rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-top: 1px solid var(--color-meister-gold);
+    border-right: 1px solid var(--color-meister-gold);
+    opacity: 0;
+    transform: scale(0.5);
+    transform-origin: top right;
+  }
+
+  .service-num {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    color: var(--color-meister-gold);
+  }
+
+  .service-content {
+    margin-top: auto;
+  }
+
+  .service-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.85rem, 3.4vw, 2.85rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.6rem;
+    color: var(--color-meister-bone);
+    will-change: transform;
+  }
+
+  .service-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--color-meister-bone);
+    opacity: 0.5;
+    margin: 0 0 1.5rem;
+  }
+
+  .service-desc {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-meister-bone);
+    opacity: 0.7;
+    margin: 0;
+    max-width: 26rem;
+  }
+
+  /* En pantallas estrechas: scroll horizontal nativo con snap, sin pin de scroll */
+  @media (max-width: 899px) {
+    .services-pin {
+      height: auto;
+      overflow: visible;
+      padding: 6rem 0 4rem;
+    }
+
+    .services-progress {
+      display: none;
+    }
+
+    .services-track-wrapper {
+      margin-top: 2.5rem;
+      overflow-x: auto;
+      overflow-y: visible;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .services-track-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+
+    .services-track {
+      width: max-content;
+    }
+
+    .service-card {
+      width: min(85vw, 26rem);
+      min-height: 22rem;
+      height: auto;
+      scroll-snap-align: start;
+    }
+  }
+</style>

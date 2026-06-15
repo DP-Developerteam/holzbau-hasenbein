@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Space+Grotesk:wght@300;400;500&display=swap');
+
+@theme {
+  --color-meister-bg: #0B0B0C;
+  --color-meister-bone: #F4F4F3;
+  --color-meister-gold: #D4AF37;
+  --color-meister-line: #2A2A2C;
+
+  --font-display: "Syne", sans-serif;
+  --font-serif: "Fraunces", serif;
+  --font-body: "Space Grotesk", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-meister-bg);
+  color: var(--color-meister-bone);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* Lenis necesita esto para gestionar el scroll suave */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: clip; }
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

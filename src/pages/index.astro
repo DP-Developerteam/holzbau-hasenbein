@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Manifesto from '../components/Manifesto.astro';
+import Services from '../components/Services.astro';
+import Werke from '../components/Werke.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Ilyas Hasenbein | Holzmeister Köln">
+  <Hero />
+  <Manifesto />
+  <Services />
+  <Werke />
+  <Contact />
+  <Footer />
+</BaseLayout>
+
+<script>
+  import { initLenis } from '../scripts/lenis-setup';
+  import { initHero } from '../scripts/hero-animation';
+  import { initManifesto } from '../scripts/manifesto-animation';
+  import { initServices } from '../scripts/services-animation';
+  import { initWerke } from '../scripts/werke-animation';
+  import { initContact } from '../scripts/contact-animation';
+  import { initFooter } from '../scripts/footer-animation';
+
+  // Esperamos a que carguen las fuentes para evitar saltos en SplitText
+  document.fonts.ready.then(() => {
+    initLenis();
+    initHero();
+    initManifesto();
+    initServices();
+    initWerke();
+    initContact();
+    initFooter();
+  });
+</script>

@@ -1,0 +1,446 @@
+---
+---
+
+<section id="contact" class="contact">
+  <div class="contact-reveal"></div>
+
+  <div class="contact-inner">
+    <span class="contact-label" data-reveal-item>— Kontakt</span>
+
+    <!--
+      Formulario listo para conectar a un backend de formularios estático
+      (FormSubmit, Formspree, Netlify Forms, etc.).
+
+      - Sustituye `action` por la URL de tu proveedor, p.ej.:
+          FormSubmit:  https://formsubmit.co/TU_EMAIL
+          Formspree:   https://formspree.io/f/TU_ID
+      - El campo "_gotcha" es un honeypot anti-spam (FormSubmit lo ignora
+        automáticamente si va vacío).
+      - El input oculto "leistung" guarda la opción elegida en el selector
+        de burbujas.
+    -->
+    <form
+      class="contact-form"
+      name="contact"
+      method="POST"
+      action="https://formsubmit.co/REPLACE_WITH_EMAIL"
+      data-contact-form
+    >
+      <input type="text" name="_gotcha" class="contact-honeypot" tabindex="-1" autocomplete="off" />
+      <input type="hidden" name="leistung" data-pill-value value="einen Dachstuhl" />
+
+      <p class="contact-sentence" data-reveal-item>
+        Hallo Ilyas, ich bin
+        <span class="contact-input-wrapper contact-input-wrapper--name">
+          <input
+            type="text"
+            name="name"
+            class="contact-input"
+            placeholder="dein Name"
+            aria-label="Name"
+            required
+          />
+        </span>
+        und möchte
+        <span class="contact-pill-wrap">
+          <button
+            class="contact-pill"
+            type="button"
+            data-pill
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="contact-bubbles"
+          >
+            <span data-pill-text>einen Dachstuhl</span>
+            <span class="contact-pill-arrow">↓</span>
+          </button>
+        </span>
+        bauen lassen.
+      </p>
+
+      <p class="contact-sentence" data-reveal-item data-contact-fields>
+        Erreichbar bin ich per
+        <span class="contact-input-wrapper">
+          <input
+            type="email"
+            name="email"
+            class="contact-input"
+            placeholder="E-Mail"
+            aria-label="E-Mail-Adresse"
+          />
+        </span>
+        und/oder
+        <span class="contact-input-wrapper">
+          <input
+            type="tel"
+            name="phone"
+            class="contact-input"
+            placeholder="Telefon"
+            aria-label="Telefonnummer"
+          />
+        </span>.
+      </p>
+
+      <label class="contact-checkbox" data-reveal-item>
+        <input type="checkbox" name="consent" required />
+        <span class="contact-checkbox-box" aria-hidden="true"></span>
+        <span class="contact-checkbox-text">
+          Ich bin einverstanden, dass meine Angaben zur Bearbeitung dieser Anfrage
+          gespeichert werden. Mehr dazu in der
+          <a href="/datenschutz">Datenschutzerklärung</a>.
+        </span>
+      </label>
+
+      <div class="contact-actions" data-reveal-item>
+        <button type="submit" class="contact-cta">
+          <span>Anfrage senden</span>
+          <span class="contact-cta-arrow">→</span>
+        </button>
+        <p class="contact-meta">
+          Atelier · Dunnwald · Köln<br/>
+          +49 176 315 464 09 · ilyas@holzbau-hasenbein.de
+        </p>
+      </div>
+    </form>
+
+    <!-- Selector flotante: overlay a pantalla completa con burbujas -->
+    <div class="contact-bubbles" id="contact-bubbles" data-pill-options aria-hidden="true">
+      <p class="contact-bubbles-hint">Was möchtest du bauen lassen?</p>
+      <button class="contact-bubble" type="button" data-option>einen Dachstuhl</button>
+      <button class="contact-bubble" type="button" data-option>eine Holzfassade</button>
+      <button class="contact-bubble" type="button" data-option>einen Anbau in Holzrahmenbau</button>
+      <button class="contact-bubble" type="button" data-option>einen Innenausbau</button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 2rem;
+    overflow: hidden;
+  }
+
+  /* Capa de bone que se revela con clip-path */
+  .contact-reveal {
+    position: absolute;
+    inset: 0;
+    background: var(--color-meister-bone);
+    clip-path: circle(0% at 50% 100%);
+    will-change: clip-path;
+    z-index: 0;
+  }
+
+  .contact-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 64rem;
+    width: 100%;
+  }
+
+  .contact-label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--color-meister-bg);
+    opacity: 0.6;
+    margin-bottom: 3rem;
+  }
+
+  .contact-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+
+  .contact-sentence {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(1.5rem, 3.5vw, 3rem);
+    line-height: 1.4;
+    color: var(--color-meister-bg);
+    margin: 0;
+  }
+
+  .contact-pill-wrap {
+    position: relative;
+    display: inline-block;
+  }
+
+  /*
+   * La píldora es un "chip" de interfaz deliberadamente más pequeño que la
+   * frase serif que lo rodea (usa la fuente de UI, no la serif). Así se
+   * mantiene en una sola línea sin importar cuán largo sea el texto elegido
+   * -> nunca se convierte en un óvalo de dos líneas que choque con las
+   * líneas de arriba/abajo. [data-pill-text] añade un tope + elipsis como
+   * red de seguridad para etiquetas extremadamente largas.
+   */
+  .contact-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    border: none;
+    background: var(--color-meister-bg);
+    color: var(--color-meister-bone);
+    font-family: var(--font-body);
+    font-size: 0.5em;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    max-width: 100%;
+    vertical-align: middle;
+    margin: 0 0.15em;
+    padding: 0.5em 1.1em;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .contact-pill [data-pill-text] {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 16em;
+  }
+
+  .contact-pill:hover { background: var(--color-meister-gold); color: var(--color-meister-bg); }
+
+  .contact-pill-arrow {
+    font-size: 0.85em;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+
+  .contact-pill[aria-expanded="true"] .contact-pill-arrow {
+    transform: rotate(180deg);
+  }
+
+  .contact-input-wrapper {
+    display: inline-block;
+    border-bottom: 2px solid var(--color-meister-bg);
+    min-width: 8em;
+  }
+
+  .contact-input {
+    background: transparent;
+    border: none;
+    font: inherit;
+    color: var(--color-meister-bg);
+    width: 100%;
+    padding: 0 0.2em;
+    outline: none;
+  }
+
+  .contact-input::placeholder { color: var(--color-meister-bg); opacity: 0.35; }
+
+  .contact-input-wrapper--name {
+    min-width: 6em;
+  }
+
+  /* Checkbox de consentimiento, estilizado a mano */
+  .contact-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    margin-top: 2.5rem;
+    cursor: pointer;
+    color: var(--color-meister-bg);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    opacity: 0.75;
+    max-width: 38rem;
+  }
+
+  .contact-checkbox input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+  }
+
+  .contact-checkbox-box {
+    flex-shrink: 0;
+    width: 1.15rem;
+    height: 1.15rem;
+    margin-top: 0.2em;
+    border: 1px solid var(--color-meister-bg);
+    border-radius: 0.25rem;
+    position: relative;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .contact-checkbox-box::after {
+    content: '';
+    position: absolute;
+    left: 0.34rem;
+    top: 0.1rem;
+    width: 0.32rem;
+    height: 0.58rem;
+    border: solid var(--color-meister-bg);
+    border-width: 0 2px 2px 0;
+    opacity: 0;
+    transform: rotate(45deg) scale(0.4);
+    transform-origin: center;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  .contact-checkbox input:checked + .contact-checkbox-box {
+    background: var(--color-meister-gold);
+    border-color: var(--color-meister-gold);
+  }
+
+  .contact-checkbox input:checked + .contact-checkbox-box::after {
+    opacity: 1;
+    transform: rotate(45deg) scale(1);
+    border-color: var(--color-meister-bg);
+  }
+
+  .contact-checkbox input:focus-visible + .contact-checkbox-box {
+    outline: 2px solid var(--color-meister-gold);
+    outline-offset: 2px;
+  }
+
+  .contact-checkbox-text a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--color-meister-gold);
+  }
+
+  .contact-actions {
+    margin-top: 3.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  /* Botón con efecto "shine" al pasar el cursor */
+  .contact-cta {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 2rem;
+    background: var(--color-meister-bg);
+    color: var(--color-meister-bone);
+    border: none;
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .contact-cta span {
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      120deg,
+      transparent 35%,
+      rgba(244, 244, 243, 0.35) 50%,
+      transparent 65%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .contact-cta:hover { transform: translateX(8px); }
+  .contact-cta:hover::before { transform: translateX(100%); }
+
+  .contact-cta-arrow { transition: transform 0.3s ease; position: relative; z-index: 1; }
+  .contact-cta:hover .contact-cta-arrow { transform: translateX(4px); }
+
+  .contact-meta {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    line-height: 1.7;
+    color: var(--color-meister-bg);
+    opacity: 0.6;
+    margin: 0;
+    text-align: right;
+  }
+
+  /*
+   * Selector flotante de "burbujas".
+   * Overlay a pantalla completa: aparece al pulsar la píldora, las opciones
+   * entran con un pequeño "rebote" y flotan suavemente hasta que se elige
+   * una o se cierra (clic fuera / Escape).
+   */
+  .contact-bubbles {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    gap: 1.25rem;
+    padding: 4rem 2rem;
+    background: rgba(11, 11, 12, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .contact-bubbles-hint {
+    width: 100%;
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--color-meister-bone);
+    opacity: 0.55;
+    margin: 0 0 1rem;
+  }
+
+  .contact-bubble {
+    border: 1px solid var(--color-meister-gold);
+    background: var(--color-meister-bone);
+    color: var(--color-meister-bg);
+    font: inherit;
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+    padding: 1rem 2rem;
+    border-radius: 999px;
+    cursor: pointer;
+    opacity: 0;
+    transform: scale(0.4);
+    will-change: transform, opacity;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  }
+
+  .contact-bubble:hover {
+    background: var(--color-meister-gold);
+    border-color: var(--color-meister-gold);
+  }
+
+  @media (max-width: 640px) {
+    .contact-bubble {
+      font-size: 0.95rem;
+      padding: 0.85rem 1.5rem;
+      text-align: center;
+    }
+  }
+</style>

@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+// import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Datenschutz | Ilyas Hasenbein">
+  <main class="legal">
+    <a href="/" class="legal-back">← Zurück</a>
+    <h1>Datenschutzerklärung</h1>
+
+    <h2>1. Datenschutz auf einen Blick</h2>
+    <p>
+      Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen.
+    </p>
+
+    <h2>2. Verantwortlicher</h2>
+    <p>
+      Ilyas Hasenbein<br/>
+      Musterstraße 12, 50672 Köln<br/>
+      ilyas@hasenbein-koeln.de
+    </p>
+
+    <h2>3. Erhebung von Daten</h2>
+    <p>
+      Beim Aufruf dieser Website werden technisch notwendige Daten (IP-Adresse, Browsertyp, Zugriffszeit) verarbeitet. Diese Daten werden nicht mit anderen Datenquellen zusammengeführt.
+    </p>
+
+    <h2>4. Kontaktformular</h2>
+    <p>
+      Wenn Sie uns per Formular oder E-Mail kontaktieren, werden Ihre Angaben zur Bearbeitung der Anfrage gespeichert.
+    </p>
+
+    <h2>5. Ihre Rechte</h2>
+    <p>
+      Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer personenbezogenen Daten.
+    </p>
+  </main>
+  <!-- <Footer /> -->
+</BaseLayout>
+
+<style>
+  .legal { max-width: 48rem; margin: 0 auto; padding: 8rem 2rem 4rem; color: var(--color-meister-bone); }
+  .legal-back { display: inline-block; font-family: var(--font-body); font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-meister-gold); text-decoration: none; margin-bottom: 4rem; }
+  .legal h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -0.02em; margin: 0 0 3rem; }
+  .legal h2 { font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: 1.4rem; margin: 2.5rem 0 0.75rem; color: var(--color-meister-gold); }
+  .legal p { font-family: var(--font-body); font-size: 0.95rem; line-height: 1.7; opacity: 0.85; margin: 0; }
+</style>
