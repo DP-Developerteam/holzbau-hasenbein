@@ -20,8 +20,8 @@ export function initServices() {
   // Escritorio: el carril se desplaza en horizontal mientras la sección queda fijada ("scroll-jacking")
   mm.add(
     {
-      isDesktop: '(min-width: 900px) and (prefers-reduced-motion: no-preference)',
-      isCompact: '(max-width: 899px), (prefers-reduced-motion: reduce)',
+      isDesktop: '(min-width: 820px) and (prefers-reduced-motion: no-preference)',
+      isCompact: '(max-width: 819px), (prefers-reduced-motion: reduce)',
     },
     (context) => {
       const conditions = context.conditions as { isDesktop: boolean; isCompact: boolean };
