@@ -120,7 +120,7 @@
      desde el script (responsive y, además, animable por GSAP sin que el CSS
      lo sobrescriba). */
   .cutout-text {
-    font-family: var(--font-display);
+    font-family: var(--font-black);
     font-weight: 800;
     will-change: font-size, letter-spacing;
   }
@@ -241,15 +241,28 @@
     text.setAttribute('y', String(cy));
     lines.forEach((line) => line.setAttribute('x', String(cx)));
 
-    // Letras más largas: "HOLZMEISTER" = 11 caracteres.
-    const longest = 11;
-    // Factor de avance medio por carácter para la fuente display (ExtraBold).
-    const advance = 0.66;
-    // Usamos solo el 86% del ancho para dejar aire en los laterales.
-    const widthFit = (w * 0.86) / (longest * advance);
-    // Dos líneas (~2.4em de alto): que no superen el 80% de la altura.
+    // Medimos el ancho REAL de la línea más larga a un tamaño de referencia,
+    // usando la API nativa del SVG. Esto es exacto y no depende de ninguna
+    // suposición sobre el ancho medio de los caracteres -> funciona igual con
+    // cualquier fuente.
+    const referenceSize = 100;
+    text.setAttribute('font-size', String(referenceSize));
+    text.style.letterSpacing = '0px';
+
+    let widestAtReference = 0;
+    lines.forEach((line) => {
+      const len = line.getComputedTextLength();
+      if (len > widestAtReference) widestAtReference = len;
+    });
+
+    // Si la fuente aún no está lista, el ancho medido puede ser 0 -> reintenta
+    if (!widestAtReference) return;
+
+    // Tamaño al que la línea más larga ocupa exactamente el 86% del ancho
+    const widthFit = ((w * 0.86) / widestAtReference) * referenceSize;
+    // Dos líneas (~2.4em de alto): que no superen el 80% de la altura
     const heightFit = (h * 0.8) / 2.4;
-    // Tope superior para pantallas muy anchas.
+    // Tope superior para pantallas muy anchas
     const cap = 280;
 
     const fontSize = Math.max(24, Math.min(widthFit, heightFit, cap));

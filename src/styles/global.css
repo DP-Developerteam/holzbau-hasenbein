@@ -36,6 +36,15 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Archivo Black";
+  src: url("/fonts/ArchivoBlack.woff2") format("woff2-variations"),
+       url("/fonts/ArchivoBlack.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --color-meister-bg: #0B0B0C;
   --color-meister-bone: #F4F4F3;
@@ -43,6 +52,7 @@
   --color-meister-line: #2A2A2C;
 
   --font-display: "Syne", sans-serif;
+  --font-black: "Archivo Black", sans-serif;
   --font-serif: "Fraunces", serif;
   --font-body: "Space Grotesk", sans-serif;
 }
